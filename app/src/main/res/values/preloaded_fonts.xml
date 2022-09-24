@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/alata</item>
+        <item>@font/anton</item>
+        <item>@font/bangers</item>
+        <item>@font/carme</item>
+        <item>@font/fredoka_one</item>
+        <item>@font/knewave</item>
+        <item>@font/montserrat_alternates</item>
+        <item>@font/montserrat_medium</item>
+        <item>@font/montserrat_semibold</item>
+    </array>
+</resources>

@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.anbillon.routine:adapter-rxjava:1.1.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/44397b876555b529c804ba03109743de/transformed/jetified-adapter-rxjava-1.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/44397b876555b529c804ba03109743de/transformed/jetified-adapter-rxjava-1.1.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/44397b876555b529c804ba03109743de/transformed/jetified-adapter-rxjava-1.1.1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.anbillon.routine/adapter-rxjava/1.1.1/c20dd1e05a804829615e6d4c9cc15480384629ec/adapter-rxjava-1.1.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.anbillon.routine/adapter-rxjava/1.1.1/38ce85cb4e2b4cea985d047a9c917368f060d090/adapter-rxjava-1.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
