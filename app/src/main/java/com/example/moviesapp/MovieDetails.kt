@@ -2,11 +2,14 @@ package com.example.moviesapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import kotlinx.android.synthetic.main.activity_movie_details.*
@@ -31,8 +34,6 @@ class MovieDetails : AppCompatActivity() {
         rating = findViewById(R.id.movie_rating)
         releaseDate = findViewById(R.id.movie_release_date)
         overview = findViewById(R.id.movie_overview)
-        recyclerViewSecond.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true)
         val movieDetail = intent.getParcelableExtra<Movie>("MOVIE")
         if (movieDetail != null) {
             populateDetails(movieDetail)
@@ -55,23 +56,24 @@ class MovieDetails : AppCompatActivity() {
                 .into(poster)
         }
         title.text = movieDetails.title
-        rating.rating = movieDetails.rate!!.div(2)
+        rating.rating = movieDetails.rate!!
         releaseDate.text = movieDetails.release
         overview.text = movieDetails.overview
 
+        recyclerViewSecond.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         val apiService = APIRetrofit.getInstance().create(APIServices::class.java)
         movieDetails.id?.let {
             apiService.getSimilarMovies(id = it)
                 .enqueue(object : Callback<MovieResponse> {
-
                     override fun onResponse(
                         call: Call<MovieResponse>,
                         response: Response<MovieResponse>
                     ) {
                         if (response.isSuccessful) {
                             recyclerViewSecond.adapter =
-                                response.body()?.movies?.let {
+                                response.body()?.movies?.let { it ->
                                     MovieAdapter(
                                         it as MutableList<Movie>,
                                         onMovieClick = { movie -> showMovieDetails(movie) })
@@ -85,8 +87,6 @@ class MovieDetails : AppCompatActivity() {
                     }
                 })
         }
-
-
     }
 
     fun showMovieDetails(movie: Movie) {
@@ -94,7 +94,4 @@ class MovieDetails : AppCompatActivity() {
         intent.putExtra("MOVIE", movie)
         startActivity(intent)
     }
-
 }
-
-

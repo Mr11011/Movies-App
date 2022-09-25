@@ -23,10 +23,8 @@ data class Movie(
 
     @SerializedName("vote_average")
     val rate: Float?,
-
     @SerializedName("overview")
     val overview:String?
-
     ,@SerializedName("description")
     val description:String?
 

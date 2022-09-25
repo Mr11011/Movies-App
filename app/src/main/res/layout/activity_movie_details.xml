@@ -145,6 +145,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/similar"
             app:spanCount="2"
+            android:scrollbarStyle="insideInset"
+            android:overScrollMode="always"
             tools:listitem="@layout/item" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

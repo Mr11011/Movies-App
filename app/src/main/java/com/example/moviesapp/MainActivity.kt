@@ -5,34 +5,39 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
-    private lateinit var recyclerView2: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var adapter: MovieAdapter
-
-
+    private lateinit var navigationBar: BottomNavigationView
+    private lateinit var recyclerView2: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = GridLayoutManager(this, 2)
+        progressBar = findViewById(R.id.progressBar)
+        adapter = MovieAdapter(mutableListOf()) { movie -> showMovieDetails(movie) }
         recyclerView2 = findViewById(R.id.recyclerView2)
         recyclerView2.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true)
-        progressBar = findViewById(R.id.progressBar)
-        adapter = MovieAdapter(mutableListOf()) { movie -> showMovieDetails(movie) }
-        getMovieData()
-        upComingMovie()
-    }
+        navigationBar = findViewById(R.id.bottom_bar)
+        val fragmentController = findNavController(R.id.fragmentContainerView)
+        navigationBar.setupWithNavController(fragmentController)
 
+        upComingMovie()
+        getMovieData()
+    }
 
     private fun getMovieData() {
         val apiService = APIRetrofit.getInstance().create(APIServices::class.java)
@@ -61,7 +66,6 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-
     private fun upComingMovie() {
         val apiServices2 = APIRetrofit.getInstance().create(APIServices::class.java)
         apiServices2.getUpComingMovies().enqueue(object : Callback<MovieResponse> {
@@ -84,7 +88,6 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
 
     private fun showMovieDetails(movie: Movie) {
         val intent = Intent(this, MovieDetails::class.java)

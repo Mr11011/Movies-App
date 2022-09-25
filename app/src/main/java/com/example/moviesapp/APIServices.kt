@@ -29,5 +29,4 @@ interface APIServices {
         @Query("api_key")
         api_key: String = API_KEY,
     ): Call<MovieResponse>
-
 }
